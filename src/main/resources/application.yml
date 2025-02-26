@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: student_management
+  datasource:
+    url: jdbc:mysql://localhost:3306/student_management
+    username: root
+    password: huybq
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
