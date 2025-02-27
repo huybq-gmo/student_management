@@ -1,8 +1,7 @@
-package com.huybq.student_management.auth.mapper;
+package com.huybq.student_management.user.mapper;
 
-import com.huybq.student_management.auth.dto.UserDto;
-import com.huybq.student_management.auth.model.User;
-import com.huybq.student_management.auth.service.PasswordService;
+import com.huybq.student_management.user.dto.UserDto;
+import com.huybq.student_management.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

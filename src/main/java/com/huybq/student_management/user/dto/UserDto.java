@@ -1,4 +1,4 @@
-package com.huybq.student_management.auth.dto;
+package com.huybq.student_management.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;

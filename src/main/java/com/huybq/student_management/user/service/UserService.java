@@ -1,10 +1,9 @@
-package com.huybq.student_management.auth.service;
+package com.huybq.student_management.user.service;
 
-import com.huybq.student_management.auth.dto.UserDto;
-import com.huybq.student_management.auth.mapper.UserMapper;
-import com.huybq.student_management.auth.model.User;
-import com.huybq.student_management.auth.repository.UserRepository;
-import jakarta.persistence.EntityExistsException;
+import com.huybq.student_management.user.dto.UserDto;
+import com.huybq.student_management.user.mapper.UserMapper;
+import com.huybq.student_management.user.model.User;
+import com.huybq.student_management.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

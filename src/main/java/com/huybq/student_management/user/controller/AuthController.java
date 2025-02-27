@@ -1,7 +1,7 @@
-package com.huybq.student_management.auth.controller;
+package com.huybq.student_management.user.controller;
 
-import com.huybq.student_management.auth.dto.UserDto;
-import com.huybq.student_management.auth.service.UserService;
+import com.huybq.student_management.user.dto.UserDto;
+import com.huybq.student_management.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

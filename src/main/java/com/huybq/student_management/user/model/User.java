@@ -1,8 +1,7 @@
-package com.huybq.student_management.auth.model;
+package com.huybq.student_management.user.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity

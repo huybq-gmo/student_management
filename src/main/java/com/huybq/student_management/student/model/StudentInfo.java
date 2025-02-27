@@ -17,7 +17,8 @@ import java.time.LocalDate;
 public class StudentInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer infoId;
+    @Column(name = "info_id")
+    private Integer id;
     private String address;
     private double averageScore;
     private LocalDate dateOfBirth;
@@ -25,4 +26,7 @@ public class StudentInfo {
     @JoinColumn(name = "student_id", nullable = false)
     @JsonBackReference
     private Student student;
+    @Column(name = "student_id_for_csv")
+    private Integer studentIdForCsv;
+
 }

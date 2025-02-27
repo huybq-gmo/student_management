@@ -22,7 +22,7 @@ public class Student {
     @Column(length = 10,nullable = false, unique = true)
     private String studentCode;
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonIgnore // Tránh vòng lặp khi serialize JSON
+    @JsonIgnore
     private StudentInfo studentInfo;
 
 }
