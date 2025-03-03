@@ -11,18 +11,17 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(name = "Student",description = "containing infor about student")
+@Schema(name = "Student", description = "containing infor about student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "student_id")
     private Integer id;
-    @Column(length = 20,nullable = false)
+    @Column(length = 20, nullable = false)
     private String studentName;
-    @Column(length = 10,nullable = false, unique = true)
+    @Column(length = 10, nullable = false, unique = true)
     private String studentCode;
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
     private StudentInfo studentInfo;
-
 }

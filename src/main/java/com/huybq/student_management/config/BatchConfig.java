@@ -13,6 +13,7 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+
 @Configuration
 @RequiredArgsConstructor
 public class BatchConfig {
@@ -27,18 +28,19 @@ public class BatchConfig {
             ItemWriter<O> itemWriter,
             int chunkSize
     ) {
-        return new StepBuilder(stepName,jobRepository)
-                .<I,O>chunk(100,transactionManager)
+        return new StepBuilder(stepName, jobRepository)
+                .<I, O>chunk(100, transactionManager)
                 .reader(itemReader)
                 .processor(itemProcessor)
                 .writer(itemWriter)
                 .build();
     }
+
     protected Job createJob(
             String jobName,
             JobRepository jobRepository,
-            Step ...steps
-    ){
+            Step... steps
+    ) {
         SimpleJobBuilder jobBuilder = new JobBuilder(jobName, jobRepository).start(steps[0]);
         for (int i = 1; i < steps.length; i++) {
             jobBuilder = jobBuilder.next(steps[i]);

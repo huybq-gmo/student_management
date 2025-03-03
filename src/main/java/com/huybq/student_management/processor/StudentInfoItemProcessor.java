@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class StudentInfoItemProcessor implements ItemProcessor<StudentInfo,StudentInfo> {
+public class StudentInfoItemProcessor implements ItemProcessor<StudentInfo, StudentInfo> {
     private final StudentRepository studentRepository;
 
     @Override

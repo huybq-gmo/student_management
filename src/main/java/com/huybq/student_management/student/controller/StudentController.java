@@ -13,8 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/students")
-@CrossOrigin("*")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = {"Authorization", "Origin"})
 @Tag(name = "Student", description = "managing student")
 public class StudentController {
     private final StudentService service;

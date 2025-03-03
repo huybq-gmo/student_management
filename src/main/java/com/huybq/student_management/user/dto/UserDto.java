@@ -8,4 +8,5 @@ import lombok.Builder;
 public record UserDto(
         @NotBlank(message = "Username is required") String username,
         @NotBlank(message = "Password is required") String password
-) {}
+) {
+}

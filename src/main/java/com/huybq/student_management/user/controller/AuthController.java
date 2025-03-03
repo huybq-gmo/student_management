@@ -1,5 +1,6 @@
 package com.huybq.student_management.user.controller;
 
+import com.huybq.student_management.user.dto.LoginDto;
 import com.huybq.student_management.user.dto.UserDto;
 import com.huybq.student_management.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,14 +21,14 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "Login", description = "Sign in user")
     @ApiResponse(responseCode = "200", description = "Succeed")
-    @ApiResponse(responseCode = "404", description = "Not found")
-    public ResponseEntity<Boolean>login(@Valid @RequestBody UserDto userDto){
+    @ApiResponse(responseCode = "401", description = "Not found")
+    public ResponseEntity<LoginDto>login(@Valid @RequestBody UserDto userDto){
         return ResponseEntity.ok(userService.login(userDto));
     }
     @PostMapping("/register")
     @Operation(summary = "Register", description = "Sign up user")
     @ApiResponse(responseCode = "200", description = "Succeed")
-    @ApiResponse(responseCode = "404", description = "Username is existed")
+    @ApiResponse(responseCode = "401", description = "Username is existed")
     public ResponseEntity<String>register(@Valid @RequestBody UserDto userDto){
         return ResponseEntity.ok(userService.register(userDto));
     }

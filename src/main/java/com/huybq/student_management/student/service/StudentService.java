@@ -55,7 +55,6 @@ public class StudentService {
         return student.getId();
     }
 
-
     public Integer updateStudent(Integer studentId, StudentWithInfoDTO studentWithInfoDTO) {
         var student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found with ID: " + studentId));
@@ -74,7 +73,6 @@ public class StudentService {
         studentRepository.save(student);
         return studentId;
     }
-
 
     public Integer deleteStudent(Integer studentId) {
         var student = studentRepository.findById(studentId)

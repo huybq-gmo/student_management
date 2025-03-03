@@ -46,20 +46,21 @@ public class CsvToDatabaseBatchConfig extends BatchConfig {
     private final StudentInfoItemProcessor studentInfoItemProcessor;
 
 
-@Bean
-public ConversionService testConversionService() {
-    DefaultConversionService conversionService = new DefaultConversionService();
-    conversionService.addConverter(new Converter<String, LocalDate>() {
-        @Override
-        public LocalDate convert(String source) {
-            if (source == null || source.isEmpty()) {
-                return null;
+    @Bean
+    public ConversionService testConversionService() {
+        DefaultConversionService conversionService = new DefaultConversionService();
+        conversionService.addConverter(new Converter<String, LocalDate>() {
+            @Override
+            public LocalDate convert(String source) {
+                if (source.isEmpty()) {
+                    return null;
+                }
+                return LocalDate.parse(source, DateTimeFormatter.ISO_DATE);
             }
-            return LocalDate.parse(source, DateTimeFormatter.ISO_DATE);
-        }
-    });
-    return conversionService;
-}
+        });
+        return conversionService;
+    }
+
     @Bean
     @StepScope
     public FlatFileItemReader<Student> studentCsvReader() {
@@ -75,6 +76,7 @@ public ConversionService testConversionService() {
                 }})
                 .build();
     }
+
     @Bean
     @StepScope
     public FlatFileItemReader<StudentInfo> studentInfoCsvReader() {
@@ -134,6 +136,7 @@ public ConversionService testConversionService() {
                 .methodName("save")
                 .build();
     }
+
     @Bean
     public StudentItemProcessor studentCsvProcessor() {
         return new StudentItemProcessor();
@@ -143,8 +146,6 @@ public ConversionService testConversionService() {
     public UserItemProcessor userCsvProcessor() {
         return new UserItemProcessor();
     }
-
-
 
     @Bean
     public Step importStudentsFromCsvStep() {
@@ -193,9 +194,6 @@ public ConversionService testConversionService() {
                 .end()
                 .build();
     }
-
-
-
 
 
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(name = "Student info",description = "containing infor detail about student")
+@Schema(name = "Student info", description = "containing infor detail about student")
 public class StudentInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
