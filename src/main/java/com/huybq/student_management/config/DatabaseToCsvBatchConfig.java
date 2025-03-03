@@ -109,7 +109,6 @@
             @Bean
             @StepScope
             public FlatFileItemWriter<StudentInfo> studentInfoCsvWriter() {
-                // Sử dụng LineAggregator để custom các field được extract
                 BeanWrapperFieldExtractor<StudentInfo> fieldExtractor = new BeanWrapperFieldExtractor<>();
                 fieldExtractor.setNames(new String[]{"id", "studentIdForCsv", "dateOfBirth", "address", "averageScore"});
 

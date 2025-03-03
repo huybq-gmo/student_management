@@ -52,7 +52,7 @@ public ConversionService testConversionService() {
     conversionService.addConverter(new Converter<String, LocalDate>() {
         @Override
         public LocalDate convert(String source) {
-            if (source == null || source.isEmpty()) {
+            if (source.isEmpty()) {
                 return null;
             }
             return LocalDate.parse(source, DateTimeFormatter.ISO_DATE);
