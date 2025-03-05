@@ -29,7 +29,7 @@ public class JobController {
             JobExecution jobExecution;
             if ("exportToCsvJob".equalsIgnoreCase(job)) {
                 jobExecution = jobLauncher.run(exportToCsvJob, jobParameters);
-            } else if ("importFromCsvJob".equalsIgnoreCase(job)) {
+                } else if ("importFromCsvJob".equalsIgnoreCase(job)) {
                 jobExecution = jobLauncher.run(importFromCsvJob, jobParameters);
             } else {
                 return ResponseEntity.badRequest().body("Job không hợp lệ!");
