@@ -11,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 @Schema(name = "Student", description = "containing infor about student")
 public class Student {
     @Id
@@ -24,4 +25,7 @@ public class Student {
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
     private StudentInfo studentInfo;
+
+    public Student(int id, String name, String code) {
+    }
 }

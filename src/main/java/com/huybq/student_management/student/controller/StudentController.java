@@ -35,15 +35,6 @@ public class StudentController {
         return ResponseEntity.ok(service.getStudentById(id));
     }
 
-    @PostMapping
-    @Operation(summary = "add student", description = "add student into list")
-    @ApiResponse(responseCode = "200", description = "Succeed")
-    @ApiResponse(responseCode = "404", description = "Not found")
-    public ResponseEntity<Integer> addStudent(@RequestBody StudentWithInfoDTO studentWithInfoDTO) {
-        Integer studentId = service.addStudent(studentWithInfoDTO);
-        return ResponseEntity.ok(studentId);
-    }
-
     @PutMapping("/{id}")
     @Operation(summary = "update student", description = "update student in list")
     @ApiResponse(responseCode = "200", description = "Succeed")
@@ -51,6 +42,15 @@ public class StudentController {
     public ResponseEntity<Integer> updateStudent(@PathVariable Integer id, @RequestBody StudentWithInfoDTO studentWithInfoDTO) {
         Integer updatedId = service.updateStudent(id, studentWithInfoDTO);
         return ResponseEntity.ok(updatedId);
+    }
+
+    @Operation(summary = "add student", description = "add student into list")
+    @ApiResponse(responseCode = "200", description = "Succeed")
+    @ApiResponse(responseCode = "404", description = "Not found")
+    @PostMapping
+    public ResponseEntity<Integer> addStudent(@RequestBody StudentWithInfoDTO studentWithInfoDTO) {
+        Integer studentId = service.addStudent(studentWithInfoDTO);
+        return ResponseEntity.ok(studentId);
     }
 
     @DeleteMapping("/{id}")

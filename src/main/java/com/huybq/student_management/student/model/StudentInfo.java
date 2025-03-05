@@ -1,6 +1,7 @@
 package com.huybq.student_management.student.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +28,8 @@ public class StudentInfo {
     @JsonBackReference
     private Student student;
     @Column(name = "student_id_for_csv")
+    @JsonIgnore
     private Integer studentIdForCsv;
+
 
 }

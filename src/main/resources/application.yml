@@ -25,8 +25,8 @@ spring:
       initialize-schema: always
     job:
       #      enabled: true
-      #      name: exportToCsvJob
-      name: importFromCsvJob
+            name: exportToCsvJob
+#      name: importFromCsvJob
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
