@@ -1,6 +1,5 @@
 package com.huybq.student_management.batch;
 
-
 import com.huybq.student_management.student.model.Student;
 import com.huybq.student_management.student.model.StudentInfo;
 import com.huybq.student_management.student.repository.StudentInfoRepository;
@@ -11,10 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @SpringBatchTest
@@ -50,24 +46,32 @@ class CsvToDatabaseBatchTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    private JobExecution runJob() throws Exception {
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addString("time", String.valueOf(System.currentTimeMillis()))
+                .toJobParameters();
+        return jobLauncher.run(importFromCsvJob, jobParameters);
+    }
+
     @Test
     void testImportStudentsFromCsv() throws Exception {
+        // Arrange
         List<Student> students = Arrays.asList(
                 new Student(1, "S001", "huybq"),
                 new Student(2, "S002", "datth")
         );
-        when(studentRepository.saveAll(any())).thenReturn(students);
+        when(studentRepository.save(any())).thenReturn(students);
 
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addString("time", String.valueOf(System.currentTimeMillis()))
-                .toJobParameters();
-        JobExecution jobExecution = jobLauncher.run(importFromCsvJob, jobParameters);
+        // Act
+        JobExecution jobExecution = runJob();
 
-        assertThat(jobExecution.getStatus().isUnsuccessful()).isFalse();
+        // Assert
+        assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 
     @Test
     void testImportStudentInfosFromCsv() throws Exception {
+        // Arrange
         var student1 = new Student(1, "S001", "huybq");
         var student2 = new Student(2, "S002", "datth");
 
@@ -77,28 +81,26 @@ class CsvToDatabaseBatchTest {
         );
         when(studentInfoRepository.saveAll(any())).thenReturn(studentInfos);
 
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addString("time", String.valueOf(System.currentTimeMillis()))
-                .toJobParameters();
-        JobExecution jobExecution = jobLauncher.run(importFromCsvJob, jobParameters);
+        // Act
+        JobExecution jobExecution = runJob();
 
-        assertThat(jobExecution.getStatus().isUnsuccessful()).isFalse();
+        // Assert
+        assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 
     @Test
     void testImportUsersFromCsv() throws Exception {
+        // Arrange
         List<User> users = Arrays.asList(
                 new User(1, "user1", "password1"),
                 new User(2, "user2", "password2")
         );
-        when(userRepository.saveAll(any())).thenReturn(users);
+        when(userRepository.save(any())).thenReturn(users);
 
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addString("time", String.valueOf(System.currentTimeMillis()))
-                .toJobParameters();
-        JobExecution jobExecution = jobLauncher.run(importFromCsvJob, jobParameters);
+        // Act
+        JobExecution jobExecution = runJob();
 
-        assertThat(jobExecution.getStatus().isUnsuccessful()).isFalse();
+        // Assert
+        assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 }
-

@@ -10,10 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,24 +45,32 @@ class DatabaseToCsvBatchTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    private JobExecution runJob() throws Exception {
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addString("time", String.valueOf(System.currentTimeMillis()))
+                .toJobParameters();
+        return jobLauncher.run(exportToCsvJob, jobParameters);
+    }
+
     @Test
     void testExportStudentsToCsv() throws Exception {
+        // Arrange
         List<Student> students = Arrays.asList(
                 new Student(1, "S001", "huybq"),
                 new Student(2, "S002", "datth")
         );
         when(studentRepository.findAll()).thenReturn(students);
 
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addString("time", String.valueOf(System.currentTimeMillis()))
-                .toJobParameters();
-        JobExecution jobExecution = jobLauncher.run(exportToCsvJob, jobParameters);
+        // Act
+        JobExecution jobExecution = runJob();
 
-        assertThat(jobExecution.getStatus().isUnsuccessful()).isFalse();
+        // Assert
+        assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 
     @Test
     void testExportStudentInfosToCsv() throws Exception {
+        // Arrange
         var student1 = new Student(1, "S001", "huybq");
         var student2 = new Student(2, "S002", "datth");
 
@@ -75,27 +80,26 @@ class DatabaseToCsvBatchTest {
         );
         when(studentInfoRepository.findAll()).thenReturn(studentInfos);
 
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addString("time", String.valueOf(System.currentTimeMillis()))
-                .toJobParameters();
-        JobExecution jobExecution = jobLauncher.run(exportToCsvJob, jobParameters);
+        // Act
+        JobExecution jobExecution = runJob();
 
-        assertThat(jobExecution.getStatus().isUnsuccessful()).isFalse();
+        // Assert
+        assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 
     @Test
     void testExportUsersToCsv() throws Exception {
+        // Arrange
         List<User> users = Arrays.asList(
                 new User(1, "user1", "password1"),
                 new User(2, "user2", "password2")
         );
         when(userRepository.findAll()).thenReturn(users);
 
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addString("time", String.valueOf(System.currentTimeMillis()))
-                .toJobParameters();
-        JobExecution jobExecution = jobLauncher.run(exportToCsvJob, jobParameters);
+        // Act
+        JobExecution jobExecution = runJob();
 
-        assertThat(jobExecution.getStatus().isUnsuccessful()).isFalse();
+        // Assert
+        assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 }
